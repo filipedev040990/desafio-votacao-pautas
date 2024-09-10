@@ -1,5 +1,5 @@
 ## Cadastrar uma pauta
-⛔ Entidade
+✅ Entidade
 ⛔ Usecase
 ⛔ Controller
 ⛔ Gateway
