@@ -1,4 +1,8 @@
-import { UpdateMotionGatewayInterface, UpdateMotionGatewayInputDTO } from '@/domain/gateways/motion/update-motion-gateway.interface'
+import {
+  UpdateMotionGatewayInterface,
+  UpdateMotionGatewayInputDTO,
+  MotionGatewayOutputDTO
+} from '@/domain/gateways/motion/update-motion-gateway.interface'
 import { prismaClient } from '../prisma-client'
 
 export class UpdateMotionGateway implements UpdateMotionGatewayInterface {
@@ -19,5 +23,10 @@ export class UpdateMotionGateway implements UpdateMotionGatewayInterface {
       },
       data
     })
+  }
+
+  async getById(id: string): Promise<MotionGatewayOutputDTO | null> {
+    const motion = await prismaClient.motion.findFirst({ where: { id } })
+    return motion ?? null
   }
 }

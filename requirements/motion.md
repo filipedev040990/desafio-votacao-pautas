@@ -6,8 +6,8 @@
 
 ## Editar uma pauta
 ✅ Usecase
-⛔ Controller
-⛔ Gateway
+✅ Controller
+✅ Gateway
 
 ## Deletar uma pauta
 ⛔ Entidade
