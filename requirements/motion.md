@@ -10,10 +10,10 @@
 ✅ Gateway
 
 ## Deletar uma pauta
-⛔ Entidade
-⛔ Usecase
-⛔ Controller
-⛔ Gateway
+✅ Entidade
+✅ Usecase
+✅ Controller
+✅ Gateway
 
 ## Listar uma pauta
 ⛔ Entidade
