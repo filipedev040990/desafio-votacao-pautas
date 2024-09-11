@@ -21,6 +21,13 @@ describe('UpdateMotionUseCase', () => {
       name: 'Any Name',
       description: 'Any description'
     }
+    gateway.getById.mockResolvedValue({
+      id: 'anyId',
+      name: 'Any Name',
+      description: 'Any description',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    })
   })
 
   afterAll(() => {
@@ -61,6 +68,17 @@ describe('UpdateMotionUseCase', () => {
       description: 'Any description',
       updatedAt: new Date()
     })
+  })
+
+  test('should call Gateway.getById once and with correct id', async () => {
+    await sut.execute(input)
+    expect(gateway.getById).toHaveBeenCalledTimes(1)
+    expect(gateway.getById).toHaveBeenCalledWith('anyId')
+  })
+
+  test('should throw if Gateway.getById returns null', async () => {
+    gateway.getById.mockResolvedValueOnce(null)
+    await expect(() => sut.execute(input)).rejects.toThrowError(new InvalidParamError('id'))
   })
 
   test('should throw if no field is provided', async () => {

@@ -7,14 +7,20 @@ import { isValidString } from '@/shared/helpers/string.helper'
 export class UpdateMotionUseCase implements UpdateMotionUseCaseInterface {
   constructor(private readonly gateway: UpdateMotionGatewayInterface) {}
   async execute(input: UpdateMotionInputDTO): Promise<void> {
-    this.validate(input)
+    await this.validate(input)
     await this.gateway.update({ ...input, updatedAt: new Date() })
   }
 
-  validate(input: UpdateMotionInputDTO): void {
+  async validate(input: UpdateMotionInputDTO): Promise<void> {
     const { id, name, description } = input
 
     if (!isValidString(id)) {
+      throw new InvalidParamError('id')
+    }
+
+    const motionExists = await this.gateway.getById(id)
+
+    if (!motionExists) {
       throw new InvalidParamError('id')
     }
 
