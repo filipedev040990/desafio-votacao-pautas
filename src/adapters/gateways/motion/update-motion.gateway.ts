@@ -1,7 +1,8 @@
 import {
   UpdateMotionGatewayInterface,
   UpdateMotionGatewayInputDTO,
-  MotionGatewayOutputDTO
+  MotionGatewayOutputDTO,
+  MotionVotingOutoutDTO
 } from '@/domain/gateways/motion/update-motion-gateway.interface'
 import { prismaClient } from '../prisma-client'
 
@@ -28,5 +29,10 @@ export class UpdateMotionGateway implements UpdateMotionGatewayInterface {
   async getById(id: string): Promise<MotionGatewayOutputDTO | null> {
     const motion = await prismaClient.motion.findFirst({ where: { id } })
     return motion ?? null
+  }
+
+  async getMotionVotingById(id: string): Promise<MotionVotingOutoutDTO | null> {
+    const motionVoting = await prismaClient.motionVoting.findFirst({ where: { motionId: id } })
+    return motionVoting ?? null
   }
 }

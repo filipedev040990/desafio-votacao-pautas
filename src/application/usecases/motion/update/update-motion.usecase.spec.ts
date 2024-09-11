@@ -28,6 +28,14 @@ describe('UpdateMotionUseCase', () => {
       createdAt: new Date(),
       updatedAt: new Date()
     })
+    gateway.getMotionVotingById.mockResolvedValue({
+      id: 'motionVotingId',
+      motionId: 'anyId',
+      startVoting: new Date(),
+      endVoting: new Date('2050-12-31 23:59:59'),
+      createdAt: new Date(),
+      updatedAt: new Date()
+    })
   })
 
   afterAll(() => {
@@ -76,9 +84,27 @@ describe('UpdateMotionUseCase', () => {
     expect(gateway.getById).toHaveBeenCalledWith('anyId')
   })
 
+  test('should call Gateway.getMotionVotingById once and with correct id', async () => {
+    await sut.execute(input)
+    expect(gateway.getMotionVotingById).toHaveBeenCalledTimes(1)
+    expect(gateway.getMotionVotingById).toHaveBeenCalledWith('anyId')
+  })
+
   test('should throw if Gateway.getById returns null', async () => {
     gateway.getById.mockResolvedValueOnce(null)
     await expect(() => sut.execute(input)).rejects.toThrowError(new InvalidParamError('id'))
+  })
+
+  test('should throw if motion voting is finished', async () => {
+    gateway.getMotionVotingById.mockResolvedValueOnce({
+      id: 'motionVotingId',
+      motionId: 'anyId',
+      startVoting: new Date(),
+      endVoting: new Date('2000-12-31 23:59:59'),
+      createdAt: new Date('2000-12-20 23:59:59'),
+      updatedAt: new Date('2000-12-20 23:59:59')
+    })
+    await expect(() => sut.execute(input)).rejects.toThrowError(new InvalidParamError('Motion voting is finished'))
   })
 
   test('should throw if no field is provided', async () => {
