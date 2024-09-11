@@ -62,4 +62,10 @@ describe('UpdateMotionUseCase', () => {
       updatedAt: new Date()
     })
   })
+
+  test('should throw if no field is provided', async () => {
+    input.name = undefined
+    input.description = undefined
+    await expect(() => sut.execute(input)).rejects.toThrowError(new InvalidParamError('Provided a field to update'))
+  })
 })

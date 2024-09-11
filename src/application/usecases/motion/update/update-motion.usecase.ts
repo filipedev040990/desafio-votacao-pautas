@@ -18,6 +18,10 @@ export class UpdateMotionUseCase implements UpdateMotionUseCaseInterface {
       throw new InvalidParamError('id')
     }
 
+    if (!name && !description) {
+      throw new InvalidParamError('Provided a field to update')
+    }
+
     if (name !== undefined && !isValidString(name)) {
       throw new InvalidParamError('name')
     }
