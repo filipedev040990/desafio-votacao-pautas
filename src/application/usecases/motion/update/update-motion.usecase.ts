@@ -1,11 +1,11 @@
 import { UpdateMotionInputDTO } from '@/domain/entities/motion/motion.dto'
-import { UpdateMotionGatewayInterface } from '@/domain/gateways/motion/update-motion-gateway.interface'
+import { MotionGatewayInterface } from '@/domain/gateways/motion.gateway'
 import { UpdateMotionUseCaseInterface } from '@/domain/usecases/motion/update-motion-usecase.interface'
 import { InvalidParamError } from '@/shared/errors'
 import { isValidString } from '@/shared/helpers/string.helper'
 
 export class UpdateMotionUseCase implements UpdateMotionUseCaseInterface {
-  constructor(private readonly gateway: UpdateMotionGatewayInterface) {}
+  constructor(private readonly gateway: MotionGatewayInterface) {}
   async execute(input: UpdateMotionInputDTO): Promise<void> {
     await this.validate(input)
     await this.gateway.update({ ...input, updatedAt: new Date() })

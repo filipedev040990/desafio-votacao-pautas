@@ -1,12 +1,12 @@
 import {
-  UpdateMotionGatewayInterface,
+  MotionGatewayInterface,
   UpdateMotionGatewayInputDTO,
   MotionGatewayOutputDTO,
   MotionVotingOutoutDTO
 } from '@/domain/gateways/motion/update-motion-gateway.interface'
 import { prismaClient } from '../prisma-client'
 
-export class UpdateMotionGateway implements UpdateMotionGatewayInterface {
+export class UpdateMotionGateway implements MotionGatewayInterface {
   async update(input: UpdateMotionGatewayInputDTO): Promise<void> {
     const data: { name?: string; description?: string } = {}
 

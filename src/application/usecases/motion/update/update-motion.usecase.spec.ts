@@ -1,11 +1,11 @@
 import { UpdateMotionInputDTO } from '@/domain/entities/motion/motion.dto'
-import { UpdateMotionGatewayInterface } from '@/domain/gateways/motion/update-motion-gateway.interface'
 import { UpdateMotionUseCase } from './update-motion.usecase'
 import { InvalidParamError } from '@/shared/errors'
+import { MotionGatewayInterface } from '@/domain/gateways/motion.gateway'
 import { mock } from 'jest-mock-extended'
 import MockDate from 'mockdate'
 
-const gateway = mock<UpdateMotionGatewayInterface>()
+const gateway = mock<MotionGatewayInterface>()
 
 describe('UpdateMotionUseCase', () => {
   let sut: UpdateMotionUseCase
