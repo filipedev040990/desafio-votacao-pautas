@@ -5,8 +5,7 @@
 ✅ Gateway
 
 ## Editar uma pauta
-⛔ Entidade
-⛔ Usecase
+✅ Usecase
 ⛔ Controller
 ⛔ Gateway
 

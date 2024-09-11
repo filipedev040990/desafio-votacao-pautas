@@ -1,4 +1,4 @@
-import { CreateMotionController } from '@/adapters/controllers/motion/create-motion.controller'
+import { CreateMotionController } from '@/adapters/controllers/motion/create/create-motion.controller'
 import { CreateMotionGateway } from '@/adapters/gateways/motion/create-motion.gateway'
 import { CreateMotionUseCase } from '@/application/usecases/motion/create/create-motion.usecase'
 
