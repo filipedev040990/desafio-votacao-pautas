@@ -1,8 +1,8 @@
 ## Cadastrar uma pauta
 ✅ Entidade
-⛔ Usecase
-⛔ Controller
-⛔ Gateway
+✅ Usecase
+✅ Controller
+✅ Gateway
 
 ## Editar uma pauta
 ⛔ Entidade

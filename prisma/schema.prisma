@@ -22,3 +22,16 @@ model Motion {
 
   @@map("motions")
 }
+
+model Request {
+  id        String   @id
+  method    String
+  route     String
+  input     String   @db.Text
+  output    String   @db.Text
+  status    Int
+  createdAt DateTime
+  updatedAt DateTime
+
+  @@map("requests")
+}
