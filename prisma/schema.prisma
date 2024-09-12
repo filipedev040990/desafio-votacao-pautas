@@ -47,7 +47,7 @@ model MotionVoting {
   updatedAt          DateTime
   ResultMotionVoting ResultMotionVoting[]
 
-  @@map("motion_votting")
+  @@map("motion_voting")
 }
 
 model ResultMotionVoting {
