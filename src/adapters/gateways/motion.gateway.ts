@@ -44,4 +44,9 @@ export class MotionGateway implements MotionGatewayInterface {
   async delete(id: string): Promise<void> {
     await prismaClient.motion.delete({ where: { id } })
   }
+
+  async list(): Promise<MotionGatewayOutputDTO[] | null> {
+    const motions = await prismaClient.motion.findMany()
+    return motions ?? null
+  }
 }

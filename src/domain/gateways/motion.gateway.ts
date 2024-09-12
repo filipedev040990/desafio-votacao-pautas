@@ -38,4 +38,5 @@ export interface MotionGatewayInterface {
   getById: (id: string) => Promise<MotionGatewayOutputDTO | null>
   getMotionVotingById: (id: string) => Promise<MotionVotingOutoutDTO | null>
   delete: (id: string, updatedAt: Date) => Promise<void>
+  list: () => Promise<MotionGatewayOutputDTO[] | null>
 }

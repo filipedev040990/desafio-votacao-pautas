@@ -32,10 +32,10 @@
 
 
 ## Listar todas as pautas
-⛔ Entidade
-⛔ Usecase
-⛔ Controller
-⛔ Gateway
+✅ Entidade
+✅ Usecase
+✅ Controller
+✅ Gateway
 
 ```
 [{
