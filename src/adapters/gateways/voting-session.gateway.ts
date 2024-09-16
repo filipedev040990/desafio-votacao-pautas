@@ -1,4 +1,4 @@
-import { CreateVotingSessionInputDTO, VotingSessionGatewayInterface } from '@/domain/gateways/voting-session.gateway'
+import { CreateVotingSessionInputDTO, VotingSessionGatewayInterface } from '@/domain/gateways/voting-session-gateway.interface'
 import { prismaClient } from './prisma-client'
 
 export class VotingSessionGateway implements VotingSessionGatewayInterface {
