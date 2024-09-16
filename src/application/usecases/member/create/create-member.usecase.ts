@@ -1,6 +1,6 @@
 import { MemberInputDTO } from '@/domain/entities/member/member.dto'
 import { MemberEntity } from '@/domain/entities/member/member.entity'
-import { MemberGatewayInterface } from '@/domain/gateways/member.gateway.interface'
+import { MemberGatewayInterface } from '@/domain/gateways/member-gateway.interface'
 import { CreateMemberUseCaseInterface } from '@/domain/usecases/member/create-member-usecase.interface'
 import { InvalidParamError } from '@/shared/errors'
 

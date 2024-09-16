@@ -1,4 +1,4 @@
-import { CreateMemberGatewayInputDTO, MemberGatewayInterface, MemberOutputDTO } from '@/domain/gateways/member.gateway.interface'
+import { CreateMemberGatewayInputDTO, MemberGatewayInterface, MemberOutputDTO } from '@/domain/gateways/member-gateway.interface'
 import { prismaClient } from './prisma-client'
 
 export class MemberGateway implements MemberGatewayInterface {

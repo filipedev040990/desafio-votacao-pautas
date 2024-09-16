@@ -1,5 +1,5 @@
 import { CreateMemberUseCase } from './create-member.usecase'
-import { MemberGatewayInterface } from '@/domain/gateways/member.gateway.interface'
+import { MemberGatewayInterface } from '@/domain/gateways/member-gateway.interface'
 import { MemberInputDTO } from '@/domain/entities/member/member.dto'
 import { MemberEntity } from '@/domain/entities/member/member.entity'
 import { mock } from 'jest-mock-extended'
