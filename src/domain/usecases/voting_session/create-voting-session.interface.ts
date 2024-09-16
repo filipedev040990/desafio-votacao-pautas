@@ -13,6 +13,6 @@ export type CreateVotingSessionOutputDTO = {
   updatedAt: Date
 }
 
-export interface CreateVotingSessionInterface {
+export interface CreateVotingSessionUseCaseInterface {
   execute: (input: CreateVotingSessionInputDTO) => Promise<CreateVotingSessionOutputDTO>
 }

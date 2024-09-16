@@ -2,14 +2,14 @@ import { MotionGatewayInterface } from '@/domain/gateways/motion.gateway'
 import { VotingSessionGatewayInterface } from '@/domain/gateways/voting-session.gateway'
 import {
   CreateVotingSessionInputDTO,
-  CreateVotingSessionInterface,
+  CreateVotingSessionUseCaseInterface,
   CreateVotingSessionOutputDTO
 } from '@/domain/usecases/voting_session/create-voting-session.interface'
 import { InvalidParamError, MissingParamError } from '@/shared/errors'
 import { isValidString } from '@/shared/helpers/string.helper'
 import { randomUUID } from 'crypto'
 
-export class CreateVotingSessionUseCase implements CreateVotingSessionInterface {
+export class CreateVotingSessionUseCase implements CreateVotingSessionUseCaseInterface {
   constructor(private readonly motionGateway: MotionGatewayInterface, private readonly votingSessionGateway: VotingSessionGatewayInterface) {}
   async execute(input: CreateVotingSessionInputDTO): Promise<CreateVotingSessionOutputDTO> {
     await this.ensureIsValidMotionId(input?.motionId)
