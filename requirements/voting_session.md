@@ -1,7 +1,7 @@
 ## Cadastrar sessão de votação
-⛔ Usecase
-⛔ Controller
-⛔ Gateway
+✅ Usecase
+✅ Controller
+✅ Gateway
 
 ## Iniciar uma sessão de votação
 ⛔ Usecase

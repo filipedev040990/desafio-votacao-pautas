@@ -13,15 +13,16 @@ export class CreateVotingSessionUseCase implements CreateVotingSessionUseCaseInt
   constructor(private readonly motionGateway: MotionGatewayInterface, private readonly votingSessionGateway: VotingSessionGatewayInterface) {}
   async execute(input: CreateVotingSessionInputDTO): Promise<CreateVotingSessionOutputDTO> {
     await this.ensureIsValidMotionId(input?.motionId)
+    await this.ensureIsUniqueVotingSession(input.motionId)
 
     this.ensureIsValidStartVoting(input?.startVoting)
-    this.ensureIsValidEndVoting(input?.endVoting)
+    this.ensureIsValidEndVoting(input?.startVoting, input?.endVoting)
 
     const votingSession = {
       id: randomUUID(),
       motionId: input.motionId,
       startVoting: new Date(input.startVoting),
-      endVoting: this.getEndVoting(input?.endVoting),
+      endVoting: this.getEndVoting(input?.startVoting, input?.endVoting),
       createdAt: new Date(),
       updatedAt: new Date()
     }
@@ -29,6 +30,13 @@ export class CreateVotingSessionUseCase implements CreateVotingSessionUseCaseInt
     await this.votingSessionGateway.save(votingSession)
 
     return votingSession
+  }
+
+  async ensureIsUniqueVotingSession(motionId: string): Promise<void> {
+    const votingSession = await this.motionGateway.getVotingSessionByMotionId(motionId)
+    if (votingSession) {
+      throw new InvalidParamError('This motion has already a vote')
+    }
   }
 
   async ensureIsValidMotionId(motionId: string): Promise<void> {
@@ -52,22 +60,20 @@ export class CreateVotingSessionUseCase implements CreateVotingSessionUseCaseInt
     }
   }
 
-  ensureIsValidEndVoting(endVoting?: Date): void {
+  ensureIsValidEndVoting(startVoting: Date, endVoting?: Date): void {
     if (!endVoting) {
       return
     }
 
-    if (new Date(endVoting) < new Date()) {
+    if (new Date(startVoting) > new Date(endVoting) || new Date(endVoting) < new Date()) {
       throw new InvalidParamError('endVoting')
     }
   }
 
-  getEndVoting(endVoting?: Date): Date {
+  getEndVoting(startVoting: Date, endVoting?: Date): Date {
     if (endVoting) {
       return new Date(endVoting)
     }
-
-    const now = new Date()
-    return new Date(now.setMinutes(now.getMinutes() + 1))
+    return new Date(new Date(startVoting).getTime() + 60000)
   }
 }

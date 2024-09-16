@@ -40,6 +40,7 @@ describe('CreateVotingSessionUseCase', () => {
       endVoting: nowOneMoreOneHour
     }
     motionGateway.getById.mockResolvedValue(fakeMotion)
+    motionGateway.getVotingSessionByMotionId.mockResolvedValue(null)
   })
 
   afterAll(() => {
@@ -78,6 +79,12 @@ describe('CreateVotingSessionUseCase', () => {
     await expect(() => sut.execute(input)).rejects.toThrowError(new InvalidParamError('endVoting'))
   })
 
+  test('should throw if endVoting is invalid', async () => {
+    input.startVoting = new Date('2050-01-01 17:00:00')
+    input.endVoting = new Date('2050-01-01 16:59:59')
+    await expect(() => sut.execute(input)).rejects.toThrowError(new InvalidParamError('endVoting'))
+  })
+
   test('should call VotingSessionGateway.save once and with correct values', async () => {
     await sut.execute(input)
     expect(votingSessionGateway.save).toHaveBeenCalledTimes(1)
@@ -92,36 +99,36 @@ describe('CreateVotingSessionUseCase', () => {
   })
 
   test('should call VotingSessionGateway.save once and with correct values when endVoting is not provided', async () => {
+    const startVoting = now
     await sut.execute({
       motionId: 'anyMotionId',
-      startVoting: now
+      startVoting
     })
-
-    const nowOneMoreOneMinute = new Date(new Date().setMinutes(new Date().getMinutes() + 1))
 
     expect(votingSessionGateway.save).toHaveBeenCalledTimes(1)
     expect(votingSessionGateway.save).toHaveBeenCalledWith({
       id: 'anyId',
       motionId: 'anyMotionId',
-      startVoting: now,
-      endVoting: nowOneMoreOneMinute,
+      startVoting,
+      endVoting: new Date(startVoting.getTime() + 60000),
       createdAt: new Date(),
       updatedAt: new Date()
     })
   })
 
   test('should return a correct output', async () => {
+    const startVoting = now
     const output = await sut.execute({
       motionId: 'anyMotionId',
       startVoting: now
     })
 
-    const nowOneMoreOneMinute = new Date(new Date().setMinutes(new Date().getMinutes() + 1))
+    const startVotingMoreOneMinute = new Date(startVoting.getTime() + 60000)
     expect(output).toEqual({
       id: 'anyId',
       motionId: 'anyMotionId',
       startVoting: now,
-      endVoting: nowOneMoreOneMinute,
+      endVoting: startVotingMoreOneMinute,
       createdAt: new Date(),
       updatedAt: new Date()
     })
@@ -142,5 +149,23 @@ describe('CreateVotingSessionUseCase', () => {
       createdAt: new Date(),
       updatedAt: new Date()
     })
+  })
+
+  test('should call SessionGateway.getVotingSessionByMotionId once and with correct motionId', async () => {
+    await sut.execute(input)
+    expect(motionGateway.getVotingSessionByMotionId).toHaveBeenCalledTimes(1)
+    expect(motionGateway.getVotingSessionByMotionId).toHaveBeenCalledWith('anyMotionId')
+  })
+
+  test('should throw if SessionGateway.getVotingSessionByMotionId returns a voting session', async () => {
+    motionGateway.getVotingSessionByMotionId.mockResolvedValueOnce({
+      id: 'motionVotingId',
+      motionId: 'anyId',
+      startVoting: new Date(),
+      endVoting: new Date('2050-12-31 23:59:59'),
+      createdAt: new Date(),
+      updatedAt: new Date()
+    })
+    await expect(() => sut.execute(input)).rejects.toThrowError(new InvalidParamError('This motion has already a vote'))
   })
 })

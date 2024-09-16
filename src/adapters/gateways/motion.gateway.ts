@@ -37,7 +37,7 @@ export class MotionGateway implements MotionGatewayInterface {
   }
 
   async getVotingSessionByMotionId(id: string): Promise<MotionVotingOutputDTO | null> {
-    const motionVoting = await prismaClient.motionVoting.findFirst({ where: { motionId: id } })
+    const motionVoting = await prismaClient.votingSession.findFirst({ where: { motionId: id } })
     return motionVoting ?? null
   }
 
