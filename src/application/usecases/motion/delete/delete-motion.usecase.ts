@@ -21,7 +21,7 @@ export class DeleteMotionUseCase implements DeleteMotionUseCaseInterface {
       throw new InvalidParamError('id')
     }
 
-    const motionVoting = await this.gateway.getMotionVotingById(id)
+    const motionVoting = await this.gateway.getVotingSessionByMotionId(id)
     if (motionVoting) {
       throw new InvalidParamError('This motion has a vote')
     }

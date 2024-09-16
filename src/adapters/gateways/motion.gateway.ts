@@ -2,7 +2,7 @@ import {
   CreateMotionGatewayInputDTO,
   MotionGatewayInterface,
   MotionGatewayOutputDTO,
-  MotionVotingOutoutDTO,
+  MotionVotingOutputDTO,
   UpdateMotionGatewayInputDTO
 } from '@/domain/gateways/motion.gateway'
 import { prismaClient } from './prisma-client'
@@ -36,7 +36,7 @@ export class MotionGateway implements MotionGatewayInterface {
     return motion ?? null
   }
 
-  async getMotionVotingById(id: string): Promise<MotionVotingOutoutDTO | null> {
+  async getVotingSessionByMotionId(id: string): Promise<MotionVotingOutputDTO | null> {
     const motionVoting = await prismaClient.motionVoting.findFirst({ where: { motionId: id } })
     return motionVoting ?? null
   }

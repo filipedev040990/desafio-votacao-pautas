@@ -28,7 +28,7 @@ describe('UpdateMotionUseCase', () => {
       createdAt: new Date(),
       updatedAt: new Date()
     })
-    gateway.getMotionVotingById.mockResolvedValue({
+    gateway.getVotingSessionByMotionId.mockResolvedValue({
       id: 'motionVotingId',
       motionId: 'anyId',
       startVoting: new Date(),
@@ -84,10 +84,10 @@ describe('UpdateMotionUseCase', () => {
     expect(gateway.getById).toHaveBeenCalledWith('anyId')
   })
 
-  test('should call Gateway.getMotionVotingById once and with correct id', async () => {
+  test('should call Gateway.getVotingSessionByMotionId once and with correct id', async () => {
     await sut.execute(input)
-    expect(gateway.getMotionVotingById).toHaveBeenCalledTimes(1)
-    expect(gateway.getMotionVotingById).toHaveBeenCalledWith('anyId')
+    expect(gateway.getVotingSessionByMotionId).toHaveBeenCalledTimes(1)
+    expect(gateway.getVotingSessionByMotionId).toHaveBeenCalledWith('anyId')
   })
 
   test('should throw if Gateway.getById returns null', async () => {
@@ -96,7 +96,7 @@ describe('UpdateMotionUseCase', () => {
   })
 
   test('should throw if motion voting is finished', async () => {
-    gateway.getMotionVotingById.mockResolvedValueOnce({
+    gateway.getVotingSessionByMotionId.mockResolvedValueOnce({
       id: 'motionVotingId',
       motionId: 'anyId',
       startVoting: new Date(),

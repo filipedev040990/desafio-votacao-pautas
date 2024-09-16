@@ -23,7 +23,7 @@ export type MotionGatewayOutputDTO = {
   updatedAt: Date
 }
 
-export type MotionVotingOutoutDTO = {
+export type MotionVotingOutputDTO = {
   id: string
   motionId: string
   startVoting: Date
@@ -36,7 +36,7 @@ export interface MotionGatewayInterface {
   save: (input: CreateMotionGatewayInputDTO) => Promise<void>
   update: (input: UpdateMotionGatewayInputDTO) => Promise<void>
   getById: (id: string) => Promise<MotionGatewayOutputDTO | null>
-  getMotionVotingById: (id: string) => Promise<MotionVotingOutoutDTO | null>
+  getVotingSessionByMotionId: (id: string) => Promise<MotionVotingOutputDTO | null>
   delete: (id: string, updatedAt: Date) => Promise<void>
   list: () => Promise<MotionGatewayOutputDTO[] | null>
 }

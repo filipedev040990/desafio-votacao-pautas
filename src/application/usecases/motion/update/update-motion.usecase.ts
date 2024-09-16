@@ -24,7 +24,7 @@ export class UpdateMotionUseCase implements UpdateMotionUseCaseInterface {
       throw new InvalidParamError('id')
     }
 
-    const motionVoting = await this.gateway.getMotionVotingById(id)
+    const motionVoting = await this.gateway.getVotingSessionByMotionId(id)
     if (motionVoting && new Date(motionVoting.endVoting) < new Date()) {
       throw new InvalidParamError('Motion voting is finished')
     }

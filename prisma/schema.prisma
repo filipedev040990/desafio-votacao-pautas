@@ -14,12 +14,12 @@ datasource db {
 }
 
 model Motion {
-  id           String         @id
-  name         String
-  description  String         @db.LongText
-  createdAt    DateTime
-  updatedAt    DateTime
-  MotionVoting MotionVoting[]
+  id            String          @id
+  name          String
+  description   String          @db.LongText
+  createdAt     DateTime
+  updatedAt     DateTime
+  VotingSession VotingSession[]
 
   @@map("motions")
 }
@@ -37,27 +37,27 @@ model Request {
   @@map("requests")
 }
 
-model MotionVoting {
-  id                 String               @id
-  Motion             Motion               @relation(fields: [motionId], references: [id])
-  motionId           String
-  startVoting        DateTime
-  endVoting          DateTime
-  createdAt          DateTime
-  updatedAt          DateTime
-  ResultMotionVoting ResultMotionVoting[]
+model VotingSession {
+  id            String                @id
+  Motion        Motion                @relation(fields: [motionId], references: [id])
+  motionId      String
+  startVoting   DateTime
+  endVoting     DateTime
+  createdAt     DateTime
+  updatedAt     DateTime
+  VotingSession ResultVotingSession[]
 
-  @@map("motion_voting")
+  @@map("voting_session")
 }
 
-model ResultMotionVoting {
-  id             String       @id
-  MotionVoting   MotionVoting @relation(fields: [motionVotingId], references: [id])
-  motionVotingId String
-  memberDocument String
-  votingValue    String
-  createdAt      DateTime
-  updatedAt      DateTime
+model ResultVotingSession {
+  id              String        @id
+  VotingSession   VotingSession @relation(fields: [votingSessionId], references: [id])
+  votingSessionId String
+  memberDocument  String
+  votingValue     String
+  createdAt       DateTime
+  updatedAt       DateTime
 
-  @@map("result_motion_voting")
+  @@map("result_voting_session")
 }
