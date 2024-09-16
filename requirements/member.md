@@ -5,9 +5,9 @@
 ✅ Gateway
 
 ## Editar um membro
-⛔ Usecase
-⛔ Controller
-⛔ Gateway
+✅ Usecase
+✅ Controller
+✅ Gateway
 
 ## Deletar um membro
 ⛔ Entidade

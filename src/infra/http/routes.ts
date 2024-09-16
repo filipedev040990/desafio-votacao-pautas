@@ -7,6 +7,7 @@ import { listMotionByIdControllerFactory } from '../factories/list-by-id-motion.
 import { listMotionsControllerFactory } from '../factories/list-motions.factory'
 import { createVotingSessionControllerFactory } from '../factories/create-voting-session.factory'
 import { createMemberControllerFactory } from '../factories/create-member.factory'
+import { updateMemberControllerFactory } from '../factories/update-member.factory'
 
 const router = Router()
 
@@ -22,5 +23,6 @@ router.post('/voting-session', expressRouteAdapter(createVotingSessionController
 
 //members
 router.post('/member', expressRouteAdapter(createMemberControllerFactory()))
+router.put('/member', expressRouteAdapter(updateMemberControllerFactory()))
 
 export { router }
