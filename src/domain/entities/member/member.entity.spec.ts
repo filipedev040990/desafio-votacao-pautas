@@ -1,6 +1,7 @@
 import { InvalidParamError } from '@/shared/errors'
 import { MemberInputDTO } from './member.dto'
 import { MemberEntity } from './member.entity'
+import MockDate from 'mockdate'
 
 jest.mock('crypto', () => ({
   randomUUID: jest.fn().mockReturnValue('anyId')
@@ -10,12 +11,21 @@ describe('MemberEntity', () => {
   let sut: any
   let input: MemberInputDTO
 
+  beforeAll(() => {
+    MockDate.set(new Date())
+  })
+
   beforeEach(() => {
     sut = MemberEntity
     input = {
       name: 'Any Name',
       document: '05441653060'
     }
+  })
+
+  beforeAll(() => {
+    MockDate.reset()
+    jest.clearAllMocks()
   })
 
   test('should throws if name is not provided', () => {
