@@ -38,26 +38,39 @@ model Request {
 }
 
 model VotingSession {
-  id            String                @id
-  Motion        Motion                @relation(fields: [motionId], references: [id])
+  id            String   @id
+  Motion        Motion   @relation(fields: [motionId], references: [id])
   motionId      String
   startVoting   DateTime
   endVoting     DateTime
   createdAt     DateTime
   updatedAt     DateTime
-  VotingSession ResultVotingSession[]
+  VotingSession Votes[]
 
   @@map("voting_session")
 }
 
-model ResultVotingSession {
+model Member {
+  id        String   @id
+  name      String
+  document  String
+  createdAt DateTime
+  updatedAt DateTime
+
+  Votes Votes[]
+
+  @@map("members")
+}
+
+model Votes {
   id              String        @id
   VotingSession   VotingSession @relation(fields: [votingSessionId], references: [id])
   votingSessionId String
-  memberDocument  String
+  Member          Member        @relation(fields: [memberId], references: [id])
+  memberId        String
   votingValue     String
   createdAt       DateTime
   updatedAt       DateTime
 
-  @@map("result_voting_session")
+  @@map("votes")
 }
