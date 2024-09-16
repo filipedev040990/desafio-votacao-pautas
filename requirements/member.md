@@ -1,8 +1,8 @@
 ## Cadastrar um membro
 ✅ Entidade
-⛔ Usecase
-⛔ Controller
-⛔ Gateway
+✅ Usecase
+✅ Controller
+✅ Gateway
 
 ## Editar um membro
 ⛔ Usecase

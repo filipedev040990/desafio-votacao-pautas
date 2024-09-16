@@ -1,7 +1,7 @@
 import { MotionInputDTO } from '@/domain/entities/motion/motion.dto'
 import { CreateMotionUseCase } from './create-motion.usecase'
 import { MotionEntity } from '@/domain/entities/motion/motion.entity'
-import { MotionGatewayInterface } from '@/domain/gateways/motion.gateway'
+import { MotionGatewayInterface } from '@/domain/gateways/motion-gateway.interface'
 import { mock } from 'jest-mock-extended'
 
 const gateway = mock<MotionGatewayInterface>()

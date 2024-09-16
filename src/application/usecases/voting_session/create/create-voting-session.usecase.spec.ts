@@ -1,8 +1,8 @@
 import { CreateVotingSessionInputDTO } from '@/domain/usecases/voting_session/create-voting-session.interface'
 import { CreateVotingSessionUseCase } from './create-voting-session.usecase'
 import { InvalidParamError, MissingParamError } from '@/shared/errors'
-import { MotionGatewayInterface } from '@/domain/gateways/motion.gateway'
 import { VotingSessionGatewayInterface } from '@/domain/gateways/voting-session-gateway.interface'
+import { MotionGatewayInterface } from '@/domain/gateways/motion-gateway.interface'
 import { mock } from 'jest-mock-extended'
 import MockDate from 'mockdate'
 

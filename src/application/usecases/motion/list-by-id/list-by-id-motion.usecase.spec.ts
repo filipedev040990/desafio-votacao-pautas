@@ -1,8 +1,8 @@
-import { MotionGatewayInterface } from '@/domain/gateways/motion.gateway'
+import { MotionGatewayInterface } from '@/domain/gateways/motion-gateway.interface'
+import { ListMotionByIdUseCase } from './list-by-id-motion.usecase'
 import { InvalidParamError } from '@/shared/errors'
 import { mock } from 'jest-mock-extended'
 import MockDate from 'mockdate'
-import { ListMotionByIdUseCase } from './list-by-id-motion.usecase'
 
 const gateway = mock<MotionGatewayInterface>()
 const fakeMotion = {

@@ -1,7 +1,7 @@
 import { UpdateMotionInputDTO } from '@/domain/entities/motion/motion.dto'
 import { UpdateMotionUseCase } from './update-motion.usecase'
 import { InvalidParamError } from '@/shared/errors'
-import { MotionGatewayInterface } from '@/domain/gateways/motion.gateway'
+import { MotionGatewayInterface } from '@/domain/gateways/motion-gateway.interface'
 import { mock } from 'jest-mock-extended'
 import MockDate from 'mockdate'
 

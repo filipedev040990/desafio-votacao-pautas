@@ -1,5 +1,4 @@
-import { MotionGatewayInterface } from '@/domain/gateways/motion.gateway'
-import { InvalidParamError } from '@/shared/errors'
+import { MotionGatewayInterface } from '@/domain/gateways/motion-gateway.interface'
 import { ListMotionsUseCase } from './list-motions.usecase'
 import { mock } from 'jest-mock-extended'
 import MockDate from 'mockdate'

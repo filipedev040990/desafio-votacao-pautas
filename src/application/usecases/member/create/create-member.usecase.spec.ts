@@ -3,6 +3,7 @@ import { MemberGatewayInterface } from '@/domain/gateways/member.gateway.interfa
 import { MemberInputDTO } from '@/domain/entities/member/member.dto'
 import { MemberEntity } from '@/domain/entities/member/member.entity'
 import { mock } from 'jest-mock-extended'
+import { InvalidParamError } from '@/shared/errors'
 
 const gateway = mock<MemberGatewayInterface>()
 const fakeMemberEntity = {
@@ -25,6 +26,7 @@ describe('CreateMemberUseCase', () => {
     }
 
     jest.spyOn(MemberEntity, 'build').mockReturnValue(fakeMemberEntity)
+    gateway.getByDocument.mockResolvedValue(null)
   })
 
   test('should call build method of MemberEntity once and with correct values', async () => {
@@ -46,5 +48,16 @@ describe('CreateMemberUseCase', () => {
   test('should return a correct output', async () => {
     const output = await sut.execute(input)
     expect(output).toEqual({ id: 'AnyId' })
+  })
+
+  test('should call Gateway.getByDocument once and with correct document', async () => {
+    await sut.execute(input)
+    expect(gateway.getByDocument).toHaveBeenCalledTimes(1)
+    expect(gateway.getByDocument).toHaveBeenCalledWith('Any document')
+  })
+
+  test('should throws if document already exists', async () => {
+    gateway.getByDocument.mockResolvedValueOnce(fakeMemberEntity)
+    await expect(() => sut.execute(input)).rejects.toThrowError(new InvalidParamError('This document already exists'))
   })
 })

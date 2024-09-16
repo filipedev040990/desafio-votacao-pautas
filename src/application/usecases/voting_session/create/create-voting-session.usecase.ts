@@ -1,4 +1,4 @@
-import { MotionGatewayInterface } from '@/domain/gateways/motion.gateway'
+import { MotionGatewayInterface } from '@/domain/gateways/motion-gateway.interface'
 import { VotingSessionGatewayInterface } from '@/domain/gateways/voting-session-gateway.interface'
 import {
   CreateVotingSessionInputDTO,

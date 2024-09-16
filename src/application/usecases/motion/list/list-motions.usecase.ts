@@ -1,4 +1,4 @@
-import { MotionGatewayInterface } from '@/domain/gateways/motion.gateway'
+import { MotionGatewayInterface } from '@/domain/gateways/motion-gateway.interface'
 import { ListMotionOutputDTO } from '@/domain/usecases/motion/list-by-id-motion-usecase.interface'
 import { ListMotionsUseCaseInterface } from '@/domain/usecases/motion/list-motions-usecase.interface'
 

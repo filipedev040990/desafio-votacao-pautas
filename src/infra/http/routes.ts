@@ -6,6 +6,7 @@ import { deleteMotionControllerFactory } from '../factories/delete-motion.factor
 import { listMotionByIdControllerFactory } from '../factories/list-by-id-motion.factory'
 import { listMotionsControllerFactory } from '../factories/list-motions.factory'
 import { createVotingSessionControllerFactory } from '../factories/create-voting-session.factory'
+import { createMemberControllerFactory } from '../factories/create-member.factory'
 
 const router = Router()
 
@@ -18,5 +19,8 @@ router.get('/motion', expressRouteAdapter(listMotionsControllerFactory()))
 
 //voting session
 router.post('/voting-session', expressRouteAdapter(createVotingSessionControllerFactory()))
+
+//members
+router.post('/member', expressRouteAdapter(createMemberControllerFactory()))
 
 export { router }

@@ -1,6 +1,6 @@
 import { MotionInputDTO } from '@/domain/entities/motion/motion.dto'
 import { MotionEntity } from '@/domain/entities/motion/motion.entity'
-import { MotionGatewayInterface } from '@/domain/gateways/motion.gateway'
+import { MotionGatewayInterface } from '@/domain/gateways/motion-gateway.interface'
 import { CreateMotionUseCaseInterface } from '@/domain/usecases/motion/create-motion-usecase.interface'
 
 export class CreateMotionUseCase implements CreateMotionUseCaseInterface {

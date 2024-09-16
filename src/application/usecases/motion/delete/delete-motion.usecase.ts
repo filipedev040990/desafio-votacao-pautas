@@ -1,4 +1,4 @@
-import { MotionGatewayInterface } from '@/domain/gateways/motion.gateway'
+import { MotionGatewayInterface } from '@/domain/gateways/motion-gateway.interface'
 import { DeleteMotionUseCaseInterface } from '@/domain/usecases/motion/delete-motion-usecase.interface'
 import { InvalidParamError } from '@/shared/errors'
 import { isValidString } from '@/shared/helpers/string.helper'

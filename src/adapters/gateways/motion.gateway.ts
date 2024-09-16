@@ -1,10 +1,10 @@
 import {
-  CreateMotionGatewayInputDTO,
   MotionGatewayInterface,
+  CreateMotionGatewayInputDTO,
+  UpdateMotionGatewayInputDTO,
   MotionGatewayOutputDTO,
-  MotionVotingOutputDTO,
-  UpdateMotionGatewayInputDTO
-} from '@/domain/gateways/motion.gateway'
+  MotionVotingOutputDTO
+} from '@/domain/gateways/motion-gateway.interface'
 import { prismaClient } from './prisma-client'
 
 export class MotionGateway implements MotionGatewayInterface {
