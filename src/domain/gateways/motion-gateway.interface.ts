@@ -1,5 +1,3 @@
-import { ListMotionOutputDTO } from '../usecases/motion/list-by-id-motion-usecase.interface'
-
 export type CreateMotionGatewayInputDTO = {
   id: string
   name: string
