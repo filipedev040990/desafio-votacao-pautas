@@ -3,6 +3,7 @@ import { VotingGatewayInterface } from '@/domain/gateways/voting-gateway.interfa
 import { VotingSessionGatewayInterface } from '@/domain/gateways/voting-session-gateway.interface'
 import { VotingUseCaseInputDTO, VotingUseCaseInterface } from '@/domain/usecases/voting_session/voting.interface'
 import { InvalidParamError, MissingParamError } from '@/shared/errors'
+import { randomUUID } from 'crypto'
 
 export class VotingUseCase implements VotingUseCaseInterface {
   constructor(
@@ -13,7 +14,17 @@ export class VotingUseCase implements VotingUseCaseInterface {
   async execute(input: VotingUseCaseInputDTO): Promise<void> {
     await this.ensureIsValidMember(input?.memberId)
     await this.ensureIsValidVotingSession(input?.votingSessionId)
+
     this.ensureIsValidVotingValue(input?.votingValue)
+
+    await this.votingGateway.save({
+      id: randomUUID(),
+      memberId: input.memberId,
+      votingSessionId: input.votingSessionId,
+      votingValue: input.votingValue,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    })
   }
 
   async ensureIsValidMember(memberId: string): Promise<void> {
