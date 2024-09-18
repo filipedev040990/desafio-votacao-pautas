@@ -84,5 +84,16 @@ describe('CreateVotingSessionUseCase', () => {
     await expect(() => sut.execute(input)).rejects.toThrowError(new InvalidParamError('votingValue'))
   })
 
-  test('should call VotingGateway.save once and with correct values', async () => {})
+  test('should call VotingGateway.save once and with correct values', async () => {
+    await sut.execute(input)
+    expect(votingGateway.save).toHaveBeenCalledTimes(1)
+    expect(votingGateway.save).toHaveBeenCalledWith({
+      id: 'anyId',
+      memberId: 'anyMemberId',
+      votingSessionId: 'anyVotingSessoionId',
+      votingValue: 'Sim',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    })
+  })
 })
