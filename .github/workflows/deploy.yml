@@ -29,4 +29,4 @@ jobs:
           USER: ubuntu
           PATH_TO_APP: /home/ubuntu/app/desafio-votacao-pautas/
         run: |
-          ssh -o StrictHostKeyChecking=no $USER@$HOST "cd $PATH_TO_APP && git pull origin main && npm install && pm2 restart all"
+          ssh -o StrictHostKeyChecking=no $USER@$HOST "cd $PATH_TO_APP && git pull origin main && npm install && npm run build && pm2 restart all"
