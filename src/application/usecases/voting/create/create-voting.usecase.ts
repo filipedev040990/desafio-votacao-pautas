@@ -14,6 +14,7 @@ export class VotingUseCase implements VotingUseCaseInterface {
   async execute(input: VotingUseCaseInputDTO): Promise<void> {
     await this.ensureIsValidMember(input?.memberId)
     await this.ensureIsValidVotingSession(input?.votingSessionId)
+    await this.ensureMemberCanVote(input?.memberId, input?.votingSessionId)
 
     this.ensureIsValidVotingValue(input?.votingValue)
 
@@ -46,6 +47,13 @@ export class VotingUseCase implements VotingUseCaseInterface {
     const votingSession = await this.votingSessinoGateway.getById(votingSessionId)
     if (!votingSession) {
       throw new InvalidParamError('votingSessionId')
+    }
+  }
+
+  async ensureMemberCanVote(memberId: string, votingSessionId: string): Promise<void> {
+    const alreadyVoted = await this.votingGateway.getByMemberAndVotingSession(memberId, votingSessionId)
+    if (alreadyVoted) {
+      throw new InvalidParamError('Member already voted')
     }
   }
 

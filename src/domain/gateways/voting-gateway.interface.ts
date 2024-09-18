@@ -9,4 +9,5 @@ export type CreateVotingGatewayInputDTO = {
 
 export interface VotingGatewayInterface {
   save: (input: CreateVotingGatewayInputDTO) => Promise<void>
+  getByMemberAndVotingSession: (memberId: string, votingSessionId: string) => Promise<CreateVotingGatewayInputDTO | null>
 }

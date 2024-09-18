@@ -47,6 +47,7 @@ describe('CreateVotingSessionUseCase', () => {
     }
     memberGateway.getById.mockResolvedValue(fakeMemberEntity)
     votingSessinoGateway.getById.mockResolvedValue(fakeVotingSession)
+    votingGateway.getByMemberAndVotingSession.mockResolvedValue(null)
   })
 
   afterAll(() => {
@@ -82,6 +83,24 @@ describe('CreateVotingSessionUseCase', () => {
   test('should throw if a invalid votingValue is provided', async () => {
     input.votingValue = 'invalid'
     await expect(() => sut.execute(input)).rejects.toThrowError(new InvalidParamError('votingValue'))
+  })
+
+  test('should call VotingGateway.getByMemberAndVotingSession once and with correct values', async () => {
+    await sut.execute(input)
+    expect(votingGateway.getByMemberAndVotingSession).toHaveBeenCalledTimes(1)
+    expect(votingGateway.getByMemberAndVotingSession).toHaveBeenCalledWith('anyMemberId', 'anyVotingSessoionId')
+  })
+
+  test('should throw if member already voted', async () => {
+    votingGateway.getByMemberAndVotingSession.mockResolvedValueOnce({
+      id: 'anyId',
+      memberId: 'anyMemberId',
+      votingSessionId: 'anyVotingSessoionId',
+      votingValue: '',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    })
+    await expect(() => sut.execute(input)).rejects.toThrowError(new InvalidParamError('Member already voted'))
   })
 
   test('should call VotingGateway.save once and with correct values', async () => {
