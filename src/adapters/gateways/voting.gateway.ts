@@ -10,4 +10,29 @@ export class VotingGateway implements VotingGatewayInterface {
     const vote = await prismaClient.votes.findFirst({ where: { memberId, votingSessionId } })
     return vote ?? null
   }
+
+  async getBySessionId(sessionId: string): Promise<any | null> {
+    const votes = await prismaClient.votes.findFirst({
+      where: {
+        id: sessionId
+      },
+      select: {
+        votingValue: true,
+        VotingSession: {
+          select: {
+            startVoting: true,
+            endVoting: true,
+            Motion: {
+              select: {
+                name: true,
+                description: true
+              }
+            }
+          }
+        }
+      }
+    })
+
+    return votes ?? null
+  }
 }
