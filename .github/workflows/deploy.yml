@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20.12'
+          node-version: '20'
 
       - name: Install SSH key
         uses: webfactory/ssh-agent@v0.7.0
@@ -29,4 +29,12 @@ jobs:
           USER: ubuntu
           PATH_TO_APP: /home/ubuntu/app/desafio-votacao-pautas/
         run: |
-          ssh -o StrictHostKeyChecking=no $USER@$HOST "cd $PATH_TO_APP && git pull origin main && npm install && npm run build && pm2 restart all"
+          ssh -o StrictHostKeyChecking=no $USER@$HOST "
+            cd $PATH_TO_APP &&
+            git fetch origin &&
+            git reset --hard origin/main
+            npm install &&
+            npm run build &&
+            pm2 flush &&
+            pm2 restart all
+          "
