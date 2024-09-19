@@ -8,26 +8,24 @@ import { mock } from 'jest-mock-extended'
 const usecase = mock<VoteCountUseCaseInterface>()
 const fakeVotes = {
   motion: {
-    name: 'anyMotion',
-    description: 'anyMotionDescription'
+    name: 'Inclusão de seguro de vida',
+    description: 'Pauta para discutir a inclusão de seguro de vida'
   },
   session: {
-    start: '01/09/2024 - 15:00:00',
-    end: '03/09/2024 - 15:00:00'
+    start: new Date('2024-09-16T17:00:00.000Z'),
+    end: new Date('2024-09-16T16:59:59.000Z')
   },
-  values: [
-    {
-      value: 'Sim',
-      total: 70,
-      percent: 70
+  values: {
+    Sim: {
+      total: 2,
+      percent: 66.66666666666667
     },
-    {
-      value: 'Não',
-      total: 30,
-      percent: 30
+    Não: {
+      total: 1,
+      percent: 33.333333333333336
     }
-  ],
-  totalVotes: 100
+  },
+  total: 3
 }
 
 describe('VoteCountController', () => {
@@ -52,7 +50,7 @@ describe('VoteCountController', () => {
 
   test('should return a correct output', async () => {
     const output = await sut.execute(input)
-    expect(output).toEqual({ statusCode: 201, body: fakeVotes })
+    expect(output).toEqual({ statusCode: 200, body: fakeVotes })
   })
 
   test('should return a correct error if CreateOwnerUseCase throws', async () => {

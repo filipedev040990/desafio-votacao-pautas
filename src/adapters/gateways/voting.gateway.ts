@@ -1,5 +1,6 @@
 import { CreateVotingGatewayInputDTO, VotingGatewayInterface } from '@/domain/gateways/voting-gateway.interface'
 import { prismaClient } from './prisma-client'
+import { Vote } from '@/domain/usecases/voting_session/vote-count.interface'
 
 export class VotingGateway implements VotingGatewayInterface {
   async save(data: CreateVotingGatewayInputDTO): Promise<void> {
@@ -11,10 +12,10 @@ export class VotingGateway implements VotingGatewayInterface {
     return vote ?? null
   }
 
-  async getBySessionId(sessionId: string): Promise<any | null> {
-    const votes = await prismaClient.votes.findFirst({
+  async getBySessionId(sessionId: string): Promise<Vote[] | null> {
+    const votes = await prismaClient.votes.findMany({
       where: {
-        id: sessionId
+        votingSessionId: sessionId
       },
       select: {
         votingValue: true,

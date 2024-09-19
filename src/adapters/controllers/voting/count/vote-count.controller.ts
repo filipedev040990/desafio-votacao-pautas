@@ -8,7 +8,7 @@ export class VoteCountController implements ControllerInterface {
   async execute(input: HttpRequest): Promise<HttpResponse> {
     try {
       const output = await this.usecase.execute(input?.params?.id)
-      return success(201, output)
+      return success(200, output)
     } catch (error) {
       return handleError(error)
     }
