@@ -9,6 +9,7 @@ import { createVotingSessionControllerFactory } from '../factories/create-voting
 import { createMemberControllerFactory } from '../factories/create-member.factory'
 import { updateMemberControllerFactory } from '../factories/update-member.factory'
 import { createVotingControllerFactory } from '../factories/create-voting.factory'
+import { voteCountControllerFactory } from '../factories/vote-count.factory'
 
 const router = Router()
 
@@ -28,5 +29,8 @@ router.put('/member', expressRouteAdapter(updateMemberControllerFactory()))
 
 //voting
 router.post('/voting', expressRouteAdapter(createVotingControllerFactory()))
+
+//vote count
+router.get('/vote/count/:id', expressRouteAdapter(voteCountControllerFactory()))
 
 export { router }

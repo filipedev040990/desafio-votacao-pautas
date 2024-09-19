@@ -1,19 +1,39 @@
-export type VoteCountInputDTO = {
+export type Vote = {
+  votingValue: string
+  VotingSession: {
+    Motion: {
+      name: string
+      description: string
+    }
+    startVoting: Date
+    endVoting: Date
+  }
+}
+
+export type VoteResult = {
+  Sim: {
+    total: number
+    percent: number
+  }
+  Não: {
+    total: number
+    percent: number
+  }
+}
+
+export type VoteCountOutputDTO = {
   motion: {
     name: string
     description: string
   }
   session: {
-    start: string
-    end: string
+    start: Date
+    end: Date
   }
-  values: {
-    value: string
-    total: number
-    percent: number
-  }[]
+  values: VoteResult
+  total: number
 }
 
 export interface VoteCountUseCaseInterface {
-  execute: (votingSessionId: string) => Promise<VoteCountInputDTO | null>
+  execute: (votingSessionId: string) => Promise<VoteCountOutputDTO | null>
 }
