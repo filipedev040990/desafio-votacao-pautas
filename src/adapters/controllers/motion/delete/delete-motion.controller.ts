@@ -4,6 +4,7 @@ import { handleError } from '@/shared/helpers/error.helper'
 import { success } from '@/shared/helpers/http.helper'
 
 export class DeleteMotionController implements ControllerInterface {
+  readonly controllerName: string = 'DeleteMotion'
   constructor(private readonly usecase: DeleteMotionUseCaseInterface) {}
   async execute(input: HttpRequest): Promise<HttpResponse> {
     try {
