@@ -34,6 +34,7 @@ jobs:
             git fetch origin &&
             git reset --hard origin/main
             npm install &&
+            npm install -g pm2 &&
             npm run build &&
             pm2 flush &&
             pm2 restart all
