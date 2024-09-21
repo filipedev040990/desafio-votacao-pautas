@@ -32,9 +32,9 @@ jobs:
           ssh -o StrictHostKeyChecking=no $USER@$HOST "
             cd $PATH_TO_APP &&
             git fetch origin &&
-            git reset --hard origin/main
-            npm install -g pm2 &&
+            git reset --hard origin/main &&            
             npm install &&
+            npm install -g pm2 &&
             npm run build &&
             pm2 flush &&
             pm2 restart all
