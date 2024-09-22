@@ -1,4 +1,4 @@
-name: Deploy to EC2 instance
+name: Deploy to EC2
 
 on:
   push:
@@ -25,14 +25,14 @@ jobs:
 
       - name: Deploy to EC2
         env:
-          HOST: 3.92.32.50
+          HOST: 54.147.17.167
           USER: ubuntu
           PATH_TO_APP: /home/ubuntu/app/desafio-votacao-pautas/
         run: |
           ssh -o StrictHostKeyChecking=no $USER@$HOST "
             cd $PATH_TO_APP &&
             git fetch origin &&
-            git reset --hard origin/main &&            
+            git reset --hard origin/main &&
             npm install &&
             npm install -g pm2 &&
             npm run build &&
