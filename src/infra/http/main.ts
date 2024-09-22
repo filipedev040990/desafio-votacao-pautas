@@ -4,8 +4,9 @@ import express from 'express'
 import cors from 'cors'
 import swaggerUi from 'swagger-ui-express'
 import swaggerDocument from '@/infra/tools/swagger.json'
-import { logger } from '@/shared/helpers/logger.helper'
+import { createLogger } from '@/shared/helpers/logger.helper'
 
+const logger = createLogger()
 const app = express()
 
 app.use(cors())

@@ -4,6 +4,7 @@ import { handleError } from '@/shared/helpers/error.helper'
 import { success } from '@/shared/helpers/http.helper'
 
 export class ListMotionsController implements ControllerInterface {
+  readonly controllerName: string = 'ListMotions'
   constructor(private readonly usecase: ListMotionsUseCaseInterface) {}
   async execute(): Promise<HttpResponse> {
     try {

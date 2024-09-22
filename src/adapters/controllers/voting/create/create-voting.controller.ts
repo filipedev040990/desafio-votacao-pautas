@@ -4,6 +4,7 @@ import { handleError } from '@/shared/helpers/error.helper'
 import { success } from '@/shared/helpers/http.helper'
 
 export class CreateVotingController implements ControllerInterface {
+  readonly controllerName: string = 'CreateVoting'
   constructor(private readonly usecase: VotingUseCaseInterface) {}
   async execute(input: HttpRequest): Promise<HttpResponse> {
     try {
