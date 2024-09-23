@@ -25,7 +25,7 @@ jobs:
 
       - name: Deploy to EC2
         env:
-          HOST: 54.147.17.167
+          HOST: 107.20.102.255
           USER: ubuntu
           PATH_TO_APP: /home/ubuntu/app/desafio-votacao-pautas/
         run: |
