@@ -1,5 +1,5 @@
 {
-  "name": "projeto_base",
+  "name": "desafio_votacao_pautas",
   "version": "1.0.0",
   "description": "Base para projetos node + typescript",
   "main": "index.js",
