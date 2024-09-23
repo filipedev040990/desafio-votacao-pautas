@@ -33,7 +33,10 @@ jobs:
             set -e
             echo 'Starting deployment...'
             export NVM_DIR=\"$HOME/.nvm\"
-            [ -s \"$NVM_DIR/nvm.sh\" ] && \. \"$NVM_DIR/nvm.sh\" || { echo 'NVM not found or could not be loaded'; exit 1; }
+            [ -d \"$NVM_DIR\" ] || { echo 'NVM directory not found'; exit 1; }
+            export PATH=\"$NVM_DIR/versions/node/v20.17.0/bin:\$PATH\"
+            . \"$NVM_DIR/nvm.sh\"
+            type nvm || { echo 'NVM is still not loaded'; exit 1; }
             nvm install 20
             nvm use 20
             echo 'Navigating to application directory...'
