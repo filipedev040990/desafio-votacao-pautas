@@ -33,7 +33,6 @@ jobs:
             cd $PATH_TO_APP &&
             git fetch origin &&
             git reset --hard origin/main &&
-            sudo rm -rf node_modules/ package-lock.json &&
             npm install &&
             npm install -g pm2 &&
             npm run build &&
