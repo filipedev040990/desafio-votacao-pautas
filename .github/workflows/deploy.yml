@@ -30,27 +30,13 @@ jobs:
           PATH_TO_APP: /home/ubuntu/app/desafio-votacao-pautas/
         run: |
           ssh -o StrictHostKeyChecking=no $USER@$HOST "
-            set -e
-            echo 'Starting deployment...'
-            export NVM_DIR=\"$HOME/.nvm\"
-            [ -d \"$NVM_DIR\" ] || { echo 'NVM directory not found'; exit 1; }
-            export PATH=\"$NVM_DIR/versions/node/v20.17.0/bin:\$PATH\"
-            . \"$NVM_DIR/nvm.sh\"
-            type nvm || { echo 'NVM is still not loaded'; exit 1; }
-            nvm install 20
-            nvm use 20
-            echo 'Navigating to application directory...'
-            cd $PATH_TO_APP
-            echo 'Fetching latest changes...'
+            cd $PATH_TO_APP &&
             git fetch origin &&
-            git reset --hard origin/main
-            echo 'Installing dependencies...'
-            npm ci
-            npm install -g pm2
-            echo 'Building project...'
-            npm run build
-            echo 'Restarting PM2...'
-            pm2 flush
+            git reset --hard origin/main &&
+            sudo rm -rf node_modules/ package-lock.json &&
+            npm install &&
+            npm install -g pm2 &&
+            npm run build &&
+            pm2 flush &&
             pm2 restart all
-            echo 'Deployment completed successfully.'
           "
