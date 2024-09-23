@@ -30,11 +30,13 @@ jobs:
           PATH_TO_APP: /home/ubuntu/app/desafio-votacao-pautas/
         run: |
           ssh -o StrictHostKeyChecking=no $USER@$HOST "
+            export NVM_DIR=\"$HOME/.nvm\" &&
+            [ -s \"$NVM_DIR/nvm.sh\" ] && \. \"$NVM_DIR/nvm.sh\" &&
+            nvm use 20 &&
             cd $PATH_TO_APP &&
             git fetch origin &&
             git reset --hard origin/main &&
-            sudo rm -rf node_modules/ package-lock.json &&
-            npm install &&
+            npm ci && # Usa 'npm ci' para uma instalação limpa baseada no package-lock.json
             npm install -g pm2 &&
             npm run build &&
             pm2 flush &&
