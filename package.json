@@ -50,9 +50,5 @@
   },
   "_moduleAliases": {
     "@": "dist"
-  },
-  "engines": {
-    "npm": "10.8.2",
-    "node": "v20.17.0"
   }
 }
