@@ -35,7 +35,7 @@ Para fins de exercício, a segurança das interfaces pode ser abstraída e qualq
 - Clone o projeto
 
   ```bash
-  git clone git@github.com:filipedev040990/desafio-backend-magalu.git
+  git clone git@github.com:filipedev040990/desafio-votacao-pautas.git
   ```
 
 ---
